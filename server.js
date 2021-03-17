@@ -33,9 +33,9 @@ app.listen(PORT, () => {
 
 
 const db = require("./app/models");
-/*db.sequelize.sync();*/
+db.sequelize.sync();
 
 // supprimer et resynchronisez les tables si besoin
-db.sequelize.sync({ force: true }).then(() => {
+/*db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
-});
+});*/
