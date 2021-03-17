@@ -19,11 +19,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.users = require("./user.model.js")(sequelize, Sequelize);
-db.promotions = require("./promotion.model.js")(sequelize, Sequelize);
+db.user = require("./user.model.js")(sequelize, Sequelize);
+db.promotion = require("./promotion.model.js")(sequelize, Sequelize);
 
 
-db.users.belongsToMany(db.promotions, { through: 'user_has_promotion', foreignKey: 'user_id' });
-db.promotions.belongsToMany(db.users, { through: 'user_has_promotion', foreignKey: 'code_promo' });
+db.user.belongsToMany(db.promotion, { through: 'user_has_promotion', foreignKey: 'user_id' });
+db.promotion.belongsToMany(db.user, { through: 'user_has_promotion', foreignKey: 'code_promo' });
 
 module.exports = db;
