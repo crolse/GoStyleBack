@@ -3,8 +3,10 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Create a new Tutorial
+    // Create a new user
     router.post("/create", user.create);
+    // User connection
+    router.post("/connection" , user.connection);
 /*
     // Retrieve all Tutorials
     router.get("/", tutorials.findAll);
