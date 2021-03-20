@@ -3,8 +3,7 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Check promotion exist
+    // Check promotion existgit 
     router.post("/add", promotion.addPromotionToUser);
-
     app.use('/api/promotion', router);
 };

@@ -15,7 +15,7 @@ exports.addPromotionToUser = (req, res) => {
 
         return;
     }
-
+    // Verification promotion is valid
     Promotion.findOne({ where: { codePromo: req.body.codePromo } }).then((promotion) => {
         console.log(promotion);
         if (promotion == null) {
@@ -24,8 +24,10 @@ exports.addPromotionToUser = (req, res) => {
             });
         }
         else {
+            // check if user already has this promo
             promotion.getUsers({ where: { id: req.body.userId } }).then((user) => {
                 if (user == "") {
+                    // insert promo to user
                     promotion.addUser(req.body.userId)
                     res.status(200).send({
                         codePromo: req.body.codePromo
