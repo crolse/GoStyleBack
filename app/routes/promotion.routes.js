@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Check promotion exist
-    router.post("/verification", promotion.promotionExist);
+    router.post("/add", promotion.addPromotionToUser);
 
     app.use('/api/promotion', router);
 };
