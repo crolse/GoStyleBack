@@ -5,10 +5,10 @@ const Op = db.Sequelize.Op;
 const jwt = require('jsonwebtoken');
 const User = db.User
 
-//#region Check promotion exist
+//#region add promotion to user
 exports.addPromotionToUser = (req, res) => {
     // Validate request
-    if (!req.body.codePromo) {
+    if (!req.body.codePromo || !req.body.userId ) {
         res.status(400).send({
             message: "aucune données reçu"
         });
@@ -52,4 +52,17 @@ exports.addPromotionToUser = (req, res) => {
         });
     });
 }
+//#endregion
 
+//#region list promotion to a user 
+exports.listPromotion = (req, res) => {
+    if (!req.body.userId ) {
+        res.status(400).send({
+            message: "aucune données reçu"
+        });
+
+        return;
+    }
+    
+}
+//#endregion
