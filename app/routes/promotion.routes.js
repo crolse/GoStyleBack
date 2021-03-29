@@ -5,5 +5,6 @@ module.exports = app => {
 
     // Check promotion exist and add to user 
     router.post("/add", promotion.addPromotionToUser);
+    router.get("/list/:userId", promotion.listPromotion)
     app.use('/api/promotion', router);
 };

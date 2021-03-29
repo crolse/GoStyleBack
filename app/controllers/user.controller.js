@@ -27,7 +27,9 @@ exports.create = (req, res) => {
             // Create a User
             const user = {
                 mail: req.body.mail,
-                password: passwordHash.generate(req.body.password)
+                password: passwordHash.generate(req.body.password),
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
 
             };
 
