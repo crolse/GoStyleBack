@@ -93,3 +93,28 @@ exports.listPromotion = (req, res) => {
 
 }
 //#endregion
+
+//#region Details promotion
+exports.detailsPromotion = (req, res) => {
+    if (!req.params.codePromo) {
+        res.status(400).send({
+            message: "aucune données reçu"
+        });
+
+        return;
+    }
+    // Recovering the benefits of a promotion according to its CodePromo
+    Promotion.findOne({ where: { codePromo: req.params.codePromo } }).then((promotion) => {
+        res.status(200).send({
+            promotion
+        });
+
+    }).catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Une erreur s'est produite lors de la récupération des détails"
+        });
+    });
+
+}
+//#endregion
