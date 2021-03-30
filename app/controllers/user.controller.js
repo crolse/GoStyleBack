@@ -1,7 +1,6 @@
 const db = require("../models");
 const User = db.user;
 var passwordHash = require('password-hash');
-const Op = db.Sequelize.Op;
 const jwt = require('jsonwebtoken');
 
 //#region  Create a new User
@@ -69,6 +68,7 @@ exports.connection = (req, res) => {
 
         return;
     }
+    //check if user exist
     User.findOne({ where: { mail: req.body.mail } }).then((value) => {
         console.log(value);
         console.log(value.dataValues.password)

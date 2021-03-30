@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 const app = express();
 
@@ -20,20 +22,24 @@ app.get("/", (req, res) => {
     res.json({ message: "GoStyle API" });
 });
 
-
 require("./app/routes/user.routes")(app);
 require("./app/routes/promotion.routes")(app);
+
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+/*const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running ${PORT}.`);
-});
+});*/
+http.createServer(app).listen(8080)
+console.log("Listening port:%s ", 8080)
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
 
 
 const db = require("./app/models");
 db.sequelize.sync();
 
-// supprimer et resynchronisez les tables si besoin
+// delete and resynchronise tables if necessary
 /*db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
 });*/

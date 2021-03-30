@@ -1,13 +1,10 @@
 const db = require("../models");
 const Promotion = db.promotion;
-var passwordHash = require('password-hash');
-const Op = db.Sequelize.Op;
-const jwt = require('jsonwebtoken');
 const User = db.user
 
 //#region add promotion to user
 exports.addPromotionToUser = (req, res) => {
-    // Validate request
+    // check if the request is valid
     if (!req.body.codePromo || !req.body.userId) {
         res.status(400).send({
             message: "aucune données reçu"
@@ -15,7 +12,7 @@ exports.addPromotionToUser = (req, res) => {
 
         return;
     }
-    // Verification promotion is valid
+    // verification of the existence of the Promo Code
     Promotion.findOne({ where: { codePromo: req.body.codePromo } }).then((promotion) => {
         console.log(promotion);
         if (promotion == null) {
@@ -54,8 +51,9 @@ exports.addPromotionToUser = (req, res) => {
 }
 //#endregion
 
-//#region list promotion to a user 
+//#region list of a user's promotions
 exports.listPromotion = (req, res) => {
+    //check if the request is valid
     if (!req.params.userId) {
         res.status(400).send({
             message: "aucune données reçu"
@@ -72,7 +70,7 @@ exports.listPromotion = (req, res) => {
             });
         }
         else {
-            // check if user already has this promo
+            // Recovery of promotions associated with the user
             user.getPromotions().then((promotion) => {
                 res.status(200).send({
                     promotion
@@ -94,8 +92,9 @@ exports.listPromotion = (req, res) => {
 }
 //#endregion
 
-//#region Details promotion
+//#region details of a promotion 
 exports.detailsPromotion = (req, res) => {
+    //check if the request is valid
     if (!req.params.codePromo) {
         res.status(400).send({
             message: "aucune données reçu"

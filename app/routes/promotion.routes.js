@@ -3,9 +3,12 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Check promotion exist and add to user 
+    //add promotion to user
     router.post("/add", promotion.addPromotionToUser);
+    //list of a user's promotions
     router.get("/list/:userId", promotion.listPromotion)
+    //details of a promotion 
     router.get("/details/:codePromo", promotion.detailsPromotion)
+    
     app.use('/api/promotion', router);
 };

@@ -22,7 +22,7 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.promotion = require("./promotion.model.js")(sequelize, Sequelize);
 
-
+//creation of the association between the two tables
 db.user.belongsToMany(db.promotion, { through: 'user_has_promotion', foreignKey: 'user_id' });
 db.promotion.belongsToMany(db.user, { through: 'user_has_promotion', foreignKey: 'code_promo' });
 
