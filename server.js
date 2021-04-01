@@ -5,8 +5,9 @@ const http = require('http')
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 
-const app = express();
 
+const app = express();
+module.exports = app
 ;
 
 app.use(cors());
